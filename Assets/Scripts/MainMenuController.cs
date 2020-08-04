@@ -55,28 +55,24 @@ public class MainMenuController : MonoBehaviour
     public void SoundOn()
     {
         PlayerPrefs.SetInt("SoundOn", 1);
-        PlayerPrefs.SetInt("SoundOff", 0);
         helpFieldText.text = "SOUND IN GAME IS ENABLED";
     }
 
     public void SoundOff()
     {
         PlayerPrefs.SetInt("SoundOn", 0);
-        PlayerPrefs.SetInt("SoundOff", 1);
         helpFieldText.text = "SOUND IN GAME IS DISABLED";
     }
 
     public void DisplayAsController()
     {
         PlayerPrefs.SetInt("DisplayController", 1);
-        PlayerPrefs.SetInt("JoystickController", 0);
         helpFieldText.text = "DISPLAY IS DIVIDED BY TWO PARTS\nLEFT FOR MOVEMENT AND RIGHT FOR AIMING";
     }
 
     public void JoysticksAsController()
     {
         PlayerPrefs.SetInt("DisplayController", 0);
-        PlayerPrefs.SetInt("JoystickController", 1);
         helpFieldText.text = "TWO VISIBLE JOYSTICKS\nLEFT FOR MOVEMENT AND RIGHT FOR AIMING";
         
     }

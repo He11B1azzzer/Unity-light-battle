@@ -47,16 +47,16 @@ public class GameController : MonoBehaviour
     }
     public void Resume()
     {
-        isPaused = false;
         Time.timeScale = 1;
         pauseObject.SetActive(false);
         gameIntObject.SetActive(true);
+        isPaused = false;
     }
 
     public void Menu()
     {
-        isPaused = false;
         Time.timeScale = 1;
+        isPaused = false;
         SceneManager.LoadScene("MainMenuScene");
     }
     public void Quit()

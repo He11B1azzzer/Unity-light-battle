@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
             EnemyMoving.points = 0;
             counter = 0;
             gameIntObject.SetActive(true);
-            CheckSettings(PlayerPrefs.GetInt("DisplayController"), PlayerPrefs.GetInt("JoystickController"), gameCanvasDisplay, gameCanvasJoysticks);
+            CheckSettings(PlayerPrefs.GetInt("DisplayController"), gameCanvasDisplay, gameCanvasJoysticks);
         }
         else
         {
@@ -47,16 +47,16 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if (PlayerPrefs.GetInt("DisplayController") == 1 && PlayerPrefs.GetInt("JoystickController") == 0)
+        if (PlayerPrefs.GetInt("DisplayController") == 1)
         {
             Moving(joystickLeftDisplay, joystickRightDisplay);
         }
-        if (PlayerPrefs.GetInt("DisplayController") == 0 && PlayerPrefs.GetInt("JoystickController") == 1)
+        else
         {
             Moving(joystickLeft, joystickRight);
         }
         pointsText.text = EnemyMoving.points.ToString();
-        DisableJoysticks(PlayerPrefs.GetInt("DisplayController"), PlayerPrefs.GetInt("JoystickController"), gameCanvasDisplay, gameCanvasJoysticks);
+        DisableJoysticks(PlayerPrefs.GetInt("DisplayController"), gameCanvasDisplay, gameCanvasJoysticks);
         if (HitPoints <= 0)
         {
             SceneManager.LoadScene("GameOverScene");
@@ -64,26 +64,26 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void DisableJoysticks(int display, int joysticks, GameObject disp, GameObject joy)
+    void DisableJoysticks(int display, GameObject disp, GameObject joy)
     {
         if (GameController.isPaused)
         {
-            if (display == 1 && joysticks == 0)
+            if (display == 1)
             {
                 disp.SetActive(false);
             }
-            else if (display == 0 && joysticks == 1)
+            else
             {
                 joy.SetActive(false);
             }
         }
         else
         {
-            if (display == 1 && joysticks == 0)
+            if (display == 1)
             {
                 disp.SetActive(true);
             }
-            else if (display == 0 && joysticks == 1)
+            else
             {
                 joy.SetActive(true);
             }
@@ -91,14 +91,14 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void CheckSettings(int display, int joysticks, GameObject disp, GameObject joy)
+    void CheckSettings(int display, GameObject disp, GameObject joy)
     {
-        if (display == 1 && joysticks == 0)
+        if (display == 1)
         {
             disp.SetActive(true);
             joy.SetActive(false);
         }
-        else if (display == 0 && joysticks == 1)
+        else if (display == 0)
         {
             disp.SetActive(false);
             joy.SetActive(true);
@@ -106,7 +106,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("DisplayController", 1);
-            PlayerPrefs.SetInt("JoystickController", 0);
             disp.SetActive(true);
             joy.SetActive(false);
         }
